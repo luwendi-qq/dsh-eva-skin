@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "EVA Cel-Shade Skin",
+    "description": "Recolors the Web UI with an EVA cel-shade palette (unit-01 purple, unit-00 blue, unit-02 red, neon green): inked borders, hard offset shadows, optional scanlines. Overrides official --dsw-* design tokens only."
+  }
+}

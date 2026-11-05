@@ -1,0 +1,109 @@
+{
+  "format": 1,
+  "title": {
+    "en": "DSH plugin market (lwd)",
+    "zh": "卢问底的 DSH 插件市场"
+  },
+  "description": {
+    "en": "Personal index of DeepSeek Harness bundles.",
+    "zh": "个人维护的 DeepSeek Harness 组合包索引。"
+  },
+  "metadata": {
+    "categories": {
+      "theme": {
+        "title": {
+          "en": "Themes & skins",
+          "zh": "主题与皮肤"
+        }
+      },
+      "ui": {
+        "title": {
+          "en": "Interface",
+          "zh": "界面增强"
+        }
+      },
+      "workflow": {
+        "title": {
+          "en": "Workflow",
+          "zh": "工作流"
+        }
+      }
+    },
+    "labels": {
+      "web": {
+        "title": {
+          "en": "Web UI",
+          "zh": "Web 界面"
+        }
+      },
+      "no-server": {
+        "title": {
+          "en": "Client only",
+          "zh": "纯客户端"
+        }
+      }
+    },
+    "sortKeys": {
+      "updated": {
+        "title": {
+          "en": "Last updated",
+          "zh": "最近更新"
+        },
+        "order": "desc"
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "@winstonlu/dsh-eva-skin",
+      "title": {
+        "en": "EVA Cel-Shade Skin",
+        "zh": "EVA 赛璐璐皮肤"
+      },
+      "description": {
+        "en": "Cel-shaded EVA skin for the Harness Web UI: ink outlines, hard shadows, CRT scanlines, session status rails and a recolored turn navigator. Pure CSS token overrides, no component rewrites.",
+        "zh": "把 Web 界面换成 EVA 赛璐璐配色：墨线描边、无模糊硬投影、CRT 扫描线、会话状态轨，以及重配色的右侧跳转条。只覆盖官方设计令牌，不改组件结构。"
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkVWQSBza2luIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwNzA3MEUiLz4KICA8cGF0aCBkPSJNOCAyMiBMMzIgOCBMNTYgMjIgTDU2IDQyIEwzMiA1NiBMOCA0MiBaIiBmaWxsPSIjN0I0QkQ4IiBzdHJva2U9IiMwNDA0MEEiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik04IDIyIEwzMiA4IEw1NiAyMiBMNTYgNDIgTDMyIDU2IEw4IDQyIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0I0RkYzOSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuNjUiLz4KICA8cmVjdCB4PSIyMiIgeT0iMjQiIHdpZHRoPSIyMCIgaGVpZ2h0PSIxNiIgZmlsbD0iIzA0MDQwQSIgb3BhY2l0eT0iMC44NSIvPgogIDxwYXRoIGQ9Ik0yNiAzMiBMMzAgMzIgTTM0IDMyIEwzOCAzMiIgc3Ryb2tlPSIjRTgzMjJEIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiLz4KPC9zdmc+Cg==",
+      "author": "卢问底",
+      "homepage": "https://github.com/luwendi-qq/dsh-eva-skin",
+      "repository": {
+        "url": "https://github.com/luwendi-qq/dsh-eva-skin"
+      },
+      "metadata": {
+        "category": "theme",
+        "keywords": [
+          "eva",
+          "cel-shade",
+          "dark",
+          "scanlines",
+          "skin",
+          "theme",
+          "rail",
+          "session-status"
+        ],
+        "labels": [
+          "web",
+          "no-server"
+        ],
+        "sortKeys": {
+          "updated": 1793876707
+        }
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1793876707,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/luwendi-qq/dsh-eva-skin",
+            "commit": "052326fca7129539114fd603a016670790e1c0af"
+          },
+          "engines": {
+            "dsh": ">=0.2.0-rc.2"
+          }
+        }
+      ]
+    }
+  ]
+}
