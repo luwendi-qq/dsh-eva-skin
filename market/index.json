@@ -87,17 +87,17 @@
           "no-server"
         ],
         "sortKeys": {
-          "updated": 1793926067
+          "updated": 1793927389
         }
       },
       "versions": [
         {
-          "version": "1.0.45",
-          "publishTimestamp": 1793926067,
+          "version": "1.0.46",
+          "publishTimestamp": 1793927389,
           "source": {
             "type": "git",
             "url": "https://github.com/luwendi-qq/dsh-eva-skin",
-            "commit": "dc68ae4f54f834a829a4159f96aa766263cb139e"
+            "commit": "de2f28299d23943d728d73c9a6c7ca440dd30a58"
           },
           "engines": {
             "dsh": ">=0.2.0-rc.2"
