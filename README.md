@@ -10,12 +10,12 @@
 
 两张图都是从运行中的真实界面导出的 DOM 重新渲染的：界面原样、皮肤原样，只把会话名、工作区、用户名换成了占位内容，并隐去了头像与挂件气泡。
 
-![主界面](docs/screenshots/hero.webp)
+![主界面](https://raw.githubusercontent.com/luwendi-qq/dsh-eva-skin/main/docs/screenshots/hero.webp)
 
 
 | 细节 | 说明 |
 | --- | --- |
-| ![](docs/screenshots/details.webp) | 品牌徽记与 HARNESS 铭牌、会话状态灯、AT 力场思考态、方形头像、右侧跳转条、输入区 |
+| ![](https://raw.githubusercontent.com/luwendi-qq/dsh-eva-skin/main/docs/screenshots/details.webp) | 品牌徽记与 HARNESS 铭牌、会话状态灯、AT 力场思考态、方形头像、右侧跳转条、输入区 |
 
 ## 效果
 
