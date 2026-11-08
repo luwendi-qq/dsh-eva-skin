@@ -6,6 +6,16 @@
 
 > EVA cel-shade skin for the DeepSeek Harness Web GUI. Client-only CSS token overrides: ink outlines, hard shadows, scanlines, session status rails.
 
+## 截图
+
+> 下图为界面示意的设计稿（mock），不是真实会话截图：内容为假数据，仅用于展示配色、面板形状与状态轨。
+
+![主界面](docs/screenshots/main.webp)
+
+| 输入区与任务面板 | 设置面板 |
+| --- | --- |
+| ![细节](docs/screenshots/details.webp) | ![设置](docs/screenshots/settings.webp) |
+
 ## 效果
 
 | 位置 | 变化 |
