@@ -87,13 +87,13 @@
           "no-server"
         ],
         "sortKeys": {
-          "updated": 1794129209
+          "updated": 1794129991
         }
       },
       "versions": [
         {
-          "version": "1.0.66",
-          "publishTimestamp": 1794129209,
+          "version": "1.0.69",
+          "publishTimestamp": 1794129991,
           "source": {
             "type": "npm"
           },

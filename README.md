@@ -8,13 +8,15 @@
 
 ## 截图
 
-> 下图为界面示意的设计稿（mock），不是真实会话截图：内容为假数据，仅用于展示配色、面板形状与状态轨。
+三张图都是从运行中的真实界面导出的 DOM 重新渲染的：Chrome 原样、皮肤原样，只把会话名、工作区、用户名、模型名换成了占位内容，并隐去了头像与挂件气泡。
 
-![主界面](docs/screenshots/main.webp)
+![主界面](docs/screenshots/hero.webp)
 
-| 输入区与任务面板 | 设置面板 |
+![对话界面](docs/screenshots/chat.webp)
+
+| 细节 | 说明 |
 | --- | --- |
-| ![细节](docs/screenshots/details.webp) | ![设置](docs/screenshots/settings.webp) |
+| ![](docs/screenshots/details.webp) | 品牌徽记与 HARNESS 铭牌、会话状态灯、AT 力场思考态、方形头像、右侧跳转条、输入区 |
 
 ## 效果
 
