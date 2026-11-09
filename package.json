@@ -1,6 +1,6 @@
 {
   "name": "@winstonlu/dsh-eva-skin",
-  "version": "1.0.70",
+  "version": "1.0.72",
   "type": "module",
   "description": "EVA cel-shade skin for the DeepSeek Harness Web GUI: ink outlines, hard shadows, scanlines, session status rails. Pure client-side CSS token overrides.",
   "license": "MIT",
