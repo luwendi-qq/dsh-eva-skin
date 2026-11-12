@@ -26,7 +26,8 @@
 | 质感 | 全屏 CRT 扫描线（可关）、选中标签页改墨底荧光字 |
 | 左栏会话行 | 3px 状态轨：绿=运行中（呼吸）、黄=已完成、红=等你回复 |
 | 右侧跳转条 | 荧光绿刻度，悬停变亮，当前条为警示黄 |
-| 底图 | 可选一张压暗的背景图（默认关闭，见「自定义底图」） |
+| 底图 | 可选一张压暗的背景图（包内自带一张，见「自定义底图」） |
+| 新会话动态底 | 新建会话的空状态窗口先演 5 秒视频（EVA 初号机出场，静音自动播放、只播一次），进入具体对话即淡出（见「新会话动态底」） |
 
 ## 安装
 
@@ -65,8 +66,8 @@ plugin_manager install_bundle file:$HOME/.dsh/backups/pkgs/winstonlu-dsh-eva-ski
   config:
     scanlines: true    # 扫描线，默认 true
     hardShadow: true   # 无模糊硬投影，默认 true
-    forceDark: false   # 强制暗色，默认 false
-    backdrop: false    # 背景图，默认 false（见下）
+    backdrop: true     # 静态底图，默认 true（设为 false 连动态底一起关）
+    backdropVideo: true # 新会话空态的动态视频底，默认 true（见下）
 ```
 
 > **坑位提醒（写给插件作者）**：配置要从 `apply(ctx, config)` 的第二个参数拿。
@@ -123,6 +124,35 @@ node tools/strip-background.mjs      # Windows / macOS 通用，纯 Node、无�
 包内默认携带一张本地 AI 生成的同人风格插画（`lib/client.js` 里内嵌 WebP）；想换图就再跑一次
 `set-background.py`，想彻底去掉图就跑 `node tools/strip-background.mjs`。
 
+## 新会话动态底（视频）
+
+「新会话」那个空状态窗口（官方 DOM 里 `[data-phase="hero"]`，即 sessionId 为空 / `shellPhase=blank`
+的会话根）底下垫的是一段视频：进窗即演、**只播一次**，播完停在最后一帧；一进入具体对话就淡出，
+换回上面那张静态插画；下次再进新会话窗口时从头再演一遍。
+
+- **只认语义锚点**：判定只看官方 conversation 根上的 `data-phase`，不碰 `hash_` 类名，换 DSH 版本不会失效。
+- **只播一次**：不 `loop`，播完停在最后一帧（那一帧本身就是完整的出场画面），不会来回循环晃眼。
+- **只在看得见时解码**：离开空态、切到后台标签页都会 `pause()`；`prefers-reduced-motion: reduce` 时整层不装。
+- **自动播放**：视频静音（音轨在编码时就丢掉了），满足浏览器的 muted autoplay 策略；万一被策略拦下，
+  停在第一帧封面上，不报错、不闪白。
+- **压暗与静态底一致**：视频层上压同一套中心暗的径向渐变，正文对比度不变。
+
+包内自带一段 1600×900 / H.264 / 24fps / 5.17s、无音轨的片段（约 1.1MB，base64 内嵌后约 1.5MB 进包，播一次约 5 秒）。
+换素材：
+
+```bash
+# 有 ffmpeg：直接从原始视频压（会丢音轨、scrub 到 faststart、顺手抓封面）
+node tools/set-background-video.mjs 你的视频.mp4
+node tools/set-background-video.mjs 你的视频.mp4 --width 1280 --bitrate 1000000   # 体积敏感时
+
+# 没有 ffmpeg：自己压好再喂进来（H.264 / 无音轨 / ≤2MB 最舒服）
+node tools/set-background-video.mjs --video 已压好.mp4 --poster 封面.webp
+```
+
+脚本会替换 `lib/client.js` 里的 `VIDEO_MP4_BASE64` 与 `VIDEO_POSTER_DATA_URI`、patch 版本号 +1、
+同步 `package.json`，再 `node --check`，然后把打包命令打出来。想关掉这个功能：`backdropVideo: false`，
+或者跑 `node tools/strip-background.mjs` 把视频和静态图一起摘掉。
+
 ## 卸载
 
 插件页点卸载，或：
@@ -131,7 +161,7 @@ node tools/strip-background.mjs      # Windows / macOS 通用，纯 Node、无�
 plugin_manager remove_bundle @winstonlu/dsh-eva-skin
 ```
 
-`dispose()` 会移除样式表、开关属性、底图层和角标，不残留。
+`dispose()` 会移除样式表、开关属性、静态底图层、动态底视频层（含 Blob URL 释放）和角标，不残留。
 
 ## 兼容性
 
@@ -146,7 +176,8 @@ plugin_manager remove_bundle @winstonlu/dsh-eva-skin
 
 ```bash
 node --check lib/client.js            # 语法检查，等价于 npm run check
-node tools/strip-background.mjs       # 去内嵌底图，等价于 npm run strip
+node tools/strip-background.mjs       # 去内嵌底图 + 动态底视频，等价于 npm run strip
+node tools/set-background-video.mjs   # 换动态底视频（见上）
 ```
 
 打包到 DSH 的 pkgs 目录（`DSH_HOME/backups/pkgs`，未设置时回退 `~/.dsh/backups/pkgs`）：

@@ -32,16 +32,26 @@ const gradient = [
 
 const re = /background-image: url\("data:image\/webp;base64,[A-Za-z0-9+/=]+"\);/g
 let stripped = 0
-const next = text.replace(re, () => {
+let next = text.replace(re, () => {
   stripped++
   return gradient
 })
 
+// 动态底的视频与封面也是内嵌的大块 base64，一并清空；
+// client.js 里判空后会自动跳过整套视频逻辑，退回静态底。
+for (const slot of ['VIDEO_MP4_BASE64', 'VIDEO_POSTER_DATA_URI']) {
+  const empty = new RegExp(`const ${slot} = '[^']*'`)
+  if (empty.test(next)) {
+    next = next.replace(empty, `const ${slot} = ''`)
+    stripped++
+  }
+}
+
 if (stripped === 0) {
-  console.log('没找到内嵌底图，跳过（已经是纯 CSS 底了）')
+  console.log('没找到内嵌底图/视频，跳过（已经是纯 CSS 底了）')
 } else {
   fs.writeFileSync(clientPath, next, 'utf8')
-  console.log(`已去掉 ${stripped} 张内嵌底图，包体现在是纯 CSS 渐变底`)
+  console.log(`已清空 ${stripped} 块内嵌素材（底图 + 动态底视频），包体现在是纯 CSS 底`)
 }
 
 // 语法检查用当前这个 node 进程自己，避免 PATH 里找不到 node
