@@ -2,7 +2,7 @@
 
 市场索引支持两种来源：npm 包，或者 **git 仓库（commit 锁定）**。没有 npm 账号就走 git，一样能挂到市场——装的时候 pnpm 直接从 GitHub 拉取指定 commit。
 
-下面这条路只需要 GitHub 账号。
+下面这条路只需要 GitHub 账号。命令在 Windows PowerShell 和 macOS zsh 里都能跑；只有涉及 Python 的工具按平台区分（Windows 用 `python`，macOS 用 `python3`）。
 
 ## 1. 推仓库
 
@@ -66,8 +66,8 @@ plugin_manager install_bundle git+https://github.com/luwendi-qq/dsh-eva-skin#<co
 
 ## 4. 发新版本
 
-1. 改 `lib/client.js` 顶部 `VERSION` 和 `package.json` 的 `version`（两处必须一致，右下角角标显示 `VERSION`）
-2. `node --check lib/client.js`
+1. 改 `lib/client.js` 顶部 `VERSION` 和 `package.json` 的 `version`（两处必须一致，右下角角标显示 `VERSION`；跑 `tools/set-background.py` 换图时这两个会自动 +1 并同步）
+2. `node --check lib/client.js`（或 `npm run check`）
 3. `git commit -am "feat: 1.0.1 ..." && git tag v1.0.1 && git push --tags`
 4. `node tools/build-index.mjs --emit git` → 提交并推送 `market/index.json`
 5. 市场页刷新一下，用户会看到新版本可升级
@@ -88,9 +88,17 @@ node tools/build-index.mjs --emit npm
 `lib/client.js` 内嵌一张 AI 生成的明日香/二号机插画（约 110KB base64），随包发布，包体 100KB。想换成纯 CSS 底或换图：
 
 ```bash
-./tools/strip-background.sh            # 去图，包体回到 ~25KB
-./tools/set-background.sh 图.png 0.95  # 换图并重新打包
+node tools/strip-background.mjs            # 去图，纯 Node、无依赖，Windows / macOS 通用；tgz 回到 ~27KB
 ```
+
+```powershell
+# 换图并重新打包（需要 Python 3 + Pillow：python -m pip install pillow）
+python tools/set-background.py 图.png 0.95
+```
+
+两个脚本都直接操作仓库根目录的 `lib/client.js`。换图脚本还会把补丁版本号 +1、同步
+`package.json` 的 `version`，并打包到 `DSH_HOME/backups/pkgs`（未设置时回退 `~/.dsh/backups/pkgs`）。
+macOS 上把 `python` 换成 `python3`。
 
 ## 检查清单
 
@@ -100,7 +108,7 @@ node tools/build-index.mjs --emit npm
 - [ ] `market/index.json` 里 `source.commit` 等于 `git rev-parse HEAD`
 - [ ] raw 地址能在浏览器直接打开，`format: 1`
 - [ ] 市场装一遍，刷新页面看到角标 `EVA SKIN 1.0.0`
-- [ ] 装完 `curl /plugins/events` 里条目 id 是 `@winstonlu/dsh-eva-skin`
+- [ ] 装完 `curl /plugins/events` 里条目 id 是 `@winstonlu/dsh-eva-skin`（Windows 上用 `curl.exe`，PowerShell 的 `curl` 是 `Invoke-WebRequest` 别名）
 
 ## 6. 出现在"别人的发现页"里（两条路）
 

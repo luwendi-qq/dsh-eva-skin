@@ -1,6 +1,6 @@
 {
   "name": "@winstonlu/dsh-eva-skin",
-  "version": "1.0.72",
+  "version": "1.0.73",
   "type": "module",
   "description": "EVA cel-shade skin for the DeepSeek Harness Web GUI: ink outlines, hard shadows, scanlines, session status rails. Pure client-side CSS token overrides.",
   "license": "MIT",
@@ -22,6 +22,13 @@
     "README.md",
     "LICENSE"
   ],
+  "scripts": {
+    "check": "node --check lib/client.js",
+    "audit": "node tools/audit-selectors.mjs",
+    "strip": "node tools/strip-background.mjs",
+    "bg": "python tools/set-background.py",
+    "pack": "python tools/set-background.py --pack-only"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

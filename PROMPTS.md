@@ -95,6 +95,6 @@ no text, no logos.
 
 出图后：
 ```
-dsh-eva-skin/tools/set-background.sh 你的图.png 0.95
+python tools/set-background.py 你的图.png 0.95
 ```
 把打印出的 tgz 装上；或直接把图丢进工作区。
